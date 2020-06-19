@@ -189,12 +189,9 @@ healthcheck(callback) {
      * get() takes a callback function.
      */
 
-    this.connector.get((callback) => {
-    if (error) {
-      console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
-    }
-    console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`)
-    });
+     this.connector.get(callback)
+
+
   }
 
   /**
@@ -213,12 +210,8 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-    this.connector.post((callback) => {
-    if (error) {
-      console.error(`\nError returned from POST request:\n${JSON.stringify(error)}`);
-    }
-    console.log(`\nResponse returned from POST request:\n${JSON.stringify(data)}`)
-    });
+     this.connector.post(callback)
+
   }
   
 }
