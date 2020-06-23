@@ -243,10 +243,10 @@ healthcheck(callback) {
        if(error){
            callback(data,error);
        }else{
-          if(data.body){
-            let bodyData = JSON.parse(data.body);
-            let item = bodyData.result;
-            let changeTicket = {
+         if(data.body){
+           let bodyObj = JSON.parse(data.body);
+           let item = bodyObj.result;
+           let chgTicket = {
                         change_ticket_number: item.number,
                         active: item.active,
                         priority: item.priority,
@@ -254,12 +254,13 @@ healthcheck(callback) {
                         work_start: item.work_start,
                         work_end: item.work_end,
                         change_ticket_key: item.sys_id
-                 }
-           callback(changeTicket,error);
+                   }
+           callback(chgTicket,error);
          }
        }
      });
   }
+
   
 }
 
