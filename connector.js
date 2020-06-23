@@ -1,7 +1,3 @@
-
-
-
-
 const request = require('request');
 
 const validResponseRegex = /(2\d\d)/;
@@ -113,15 +109,16 @@ let callbackData = null;
 let callbackError = null;
 
 if (this.isHibernating(response)) {
-console.error('Hibernation Error present.');
+log.info('Hibernation Error present.');
 callbackError = response;
 } else if (error) {
-console.error('Error present.');
+log.info('Error present.');
 callbackError = error;
 } else if (!validResponseRegex.test(response.statusCode)) {
-console.error('Bad response code.');
+log.info('Bad response code.');
 callbackError = response;
 } else {
+log.info("Data returned with no errors");
 callbackData = response;
 }
 return callback(callbackData, callbackError);
@@ -162,8 +159,10 @@ pass: callOptions.password,
 baserUrl: callOptions.url,
 uri: callOptions.url + uri
 };
+
 request(requestOptions, (error, response, body) => {
 this.processRequestResults(error, response, body, (processedResults, processedError) => callback(processedResults, processedError));
+
 });
 }
 
@@ -207,6 +206,7 @@ let getCallOptions = { ...this.options };
 getCallOptions.method = 'GET';
 getCallOptions.query = 'sysparm_limit=1';
 this.sendRequest(getCallOptions, (results, error) => callback(results, error));
+
 }
 
 }
